@@ -158,6 +158,8 @@ module ActiveShipping
       rate_request = build_rate_request(origin, destination, packages, options)
 
       xml = commit(save_request(rate_request), (options[:test] || false))
+      
+      puts xml
 
       parse_rate_response(origin, destination, packages, xml, options)
     end
@@ -167,6 +169,9 @@ module ActiveShipping
 
       tracking_request = build_tracking_request(tracking_number, options)
       xml = commit(save_request(tracking_request), (options[:test] || false))
+      
+      puts xml
+      
       parse_tracking_response(xml, options)
     end
 
