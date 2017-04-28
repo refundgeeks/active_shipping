@@ -499,6 +499,8 @@ module ActiveShipping
             max_transit_time = rated_shipment.at('MaximumTransitTime').try(:text) if service_code == "FEDEX_GROUND"
 
             delivery_timestamp = rated_shipment.at('DeliveryTimestamp').try(:text)
+            puts '....................'
+            puts delivery_timestamp 
             delivery_range = delivery_range_from(transit_time, max_transit_time, delivery_timestamp, (service_code == "GROUND_HOME_DELIVERY"), options)
 
             currency = rated_shipment.at('RatedShipmentDetails/ShipmentRateDetail/TotalNetCharge/Currency').text
