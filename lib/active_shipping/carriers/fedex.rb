@@ -158,9 +158,7 @@ module ActiveShipping
       rate_request = build_rate_request(origin, destination, packages, options)
 
       xml = commit(save_request(rate_request), (options[:test] || false))
-      
-      puts xml
-
+     
       parse_rate_response(origin, destination, packages, xml, options)
     end
 
@@ -169,8 +167,6 @@ module ActiveShipping
 
       tracking_request = build_tracking_request(tracking_number, options)
       xml = commit(save_request(tracking_request), (options[:test] || false))
-      
-      puts xml
       
       parse_tracking_response(xml, options)
     end
@@ -499,8 +495,7 @@ module ActiveShipping
             max_transit_time = rated_shipment.at('MaximumTransitTime').try(:text) if service_code == "FEDEX_GROUND"
 
             delivery_timestamp = rated_shipment.at('DeliveryTimestamp').try(:text)
-            puts '....................'
-            puts delivery_timestamp 
+           
             delivery_range = delivery_range_from(transit_time, max_transit_time, delivery_timestamp, (service_code == "GROUND_HOME_DELIVERY"), options)
 
             currency = rated_shipment.at('RatedShipmentDetails/ShipmentRateDetail/TotalNetCharge/Currency').text
@@ -548,10 +543,6 @@ module ActiveShipping
         delivery_range = transit_range.map { |days| business_days_from(pickup_date, days, is_home_delivery) }
       end
       
-      puts '=================================='
-      puts delivery_range
-      puts '=================================='
-
       delivery_range
     end
 
