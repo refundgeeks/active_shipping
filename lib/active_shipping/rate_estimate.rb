@@ -189,7 +189,7 @@ module ActiveShipping
     # @return [Date, nil] The Date object absed on the input, or `nil` if no date
     #   could be determined.
     def date_for(date)
-      date && Date.strptime(date.to_s, "%Y-%m-%dT%H:%M:%S")
+      date && Datetime.strptime(date.to_s, "%Y-%m-%dT%H:%M:%S")
     rescue ArgumentError
       nil
     end
