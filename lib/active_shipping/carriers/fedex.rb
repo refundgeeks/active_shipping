@@ -548,7 +548,9 @@ module ActiveShipping
         delivery_range = transit_range.map { |days| business_days_from(pickup_date, days, is_home_delivery) }
       end
       
+      puts '=================================='
       puts delivery_range
+      puts '=================================='
 
       delivery_range
     end
