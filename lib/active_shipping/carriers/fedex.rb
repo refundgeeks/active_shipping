@@ -587,6 +587,8 @@ module ActiveShipping
 
     def parse_tracking_response(response, options)
       xml = build_document(response, 'TrackReply')
+      
+      puts xml
 
       success = response_success?(xml)
       message = response_message(xml)
@@ -646,8 +648,6 @@ module ActiveShipping
         if status_detail.blank?
           status_code, status, status_description, delivery_signature = nil
         else
-          puts '................'
-          puts status_detail
           status_code = status_detail.at('Code').try(:text)
           status_description = status_detail.at('AncillaryDetails/ReasonDescription').try(:text) || status_detail.at('Description').try(:text)
 
