@@ -587,9 +587,7 @@ module ActiveShipping
 
     def parse_tracking_response(response, options)
       xml = build_document(response, 'TrackReply')
-      
-      puts xml
-
+    
       success = response_success?(xml)
       message = response_message(xml)
 
