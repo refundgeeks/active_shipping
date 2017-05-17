@@ -951,16 +951,14 @@ module ActiveShipping
       success = response_success?(xml)
       message = response_message(xml)
       delivery_estimates = []
-      
-      ap xml
-
+     
       if success
         xml.css('ServiceSummary').each do |service_summary|
           # Translate the Time in Transit Codes to the service codes used elsewhere
           service_name = service_summary.at('Service/Description').text
           service_code = UPS::DEFAULT_SERVICE_NAME_TO_CODE[service_name]
           date = Date.strptime(service_summary.at('EstimatedArrival/Date').text, '%Y-%m-%d')
-          time = service_summary.at('EstimatedArrival/Time').text
+          time =  DateTime.parse(service_summary.at('EstimatedArrival/Time').text, '%H:%M').strftime('%H:%M')
           business_transit_days = service_summary.at('EstimatedArrival/BusinessTransitDays').text.to_i
           delivery_estimates << DeliveryDateEstimate.new(origin, destination, self.class.class_variable_get(:@@name),
                                     service_name,
