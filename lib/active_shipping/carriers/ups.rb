@@ -951,6 +951,8 @@ module ActiveShipping
       success = response_success?(xml)
       message = response_message(xml)
       delivery_estimates = []
+      
+      ap xml
 
       if success
         xml.css('ServiceSummary').each do |service_summary|
