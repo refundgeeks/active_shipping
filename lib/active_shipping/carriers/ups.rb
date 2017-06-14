@@ -915,11 +915,9 @@ module ActiveShipping
           # Has the shipment been delivered?
           if status == :delivered
             delivered_activity = activities.first
-            if delivered_activity.at('Status/StatusType/Code').text != 'D'
-              activities.map do |activity|
-                if activity.at('Status/StatusType/Code').try(:text) == 'D'
-                  delivered_activity = activity
-                end
+            activities.map do |activity|
+              if activity.at('Status/StatusType/Code').try(:text) == 'D'
+                delivered_activity = activity
               end
             end
                         
