@@ -919,7 +919,6 @@ module ActiveShipping
               activities.map do |activity|
                 if activity.at('Status/StatusType/Code').try(:text) == 'D'
                   delivered_activity = activity
-                  break
                 end
               end
             end
