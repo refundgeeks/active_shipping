@@ -916,7 +916,7 @@ module ActiveShipping
           if status == :delivered
             delivered_activity = activities.first
             puts delivered_activity
-            if !delivered_activity.at('Status/StatusType/Code').text == 'D'
+            if delivered_activity.at('Status/StatusType/Code').text != 'D'
               activities.map do |activity|
                 puts activity.at('Status/StatusType/Code').try(:text)
                 if activity.at('Status/StatusType/Code').try(:text) == 'D'
