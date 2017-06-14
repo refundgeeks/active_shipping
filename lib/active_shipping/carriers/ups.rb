@@ -915,6 +915,15 @@ module ActiveShipping
           # Has the shipment been delivered?
           if status == :delivered
             delivered_activity = activities.first
+            if !delivered_activity.at('Status/StatusType/Code').text == 'D'
+              activities.map do |activity|
+                if activity.at('Status/StatusType/Code').try(:text) == 'D'
+                  delivered_activity = activity
+                  break
+                end
+              end
+            end
+                        
             delivery_signature = delivered_activity.at('ActivityLocation/SignedForByName').try(:text)
             if delivered_activity.at('Status/StatusType/Code').text == 'D'
               actual_delivery_date = parse_ups_datetime(:date => delivered_activity.at('Date'), :time => delivered_activity.at('Time'))
