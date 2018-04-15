@@ -574,7 +574,7 @@ module ActiveShipping
         end
       end
 
-      future_date
+      future_date.to_s
     end
 
     #Transit times for FedEx® Ground do not include Saturdays, Sundays, or holidays.
