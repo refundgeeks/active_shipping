@@ -487,7 +487,6 @@ module ActiveShipping
         missing_xml_field = false
         rate_estimates = xml.root.css('> RateReplyDetails').map do |rated_shipment|
           begin
-            ap rated_shipment
             service_code = rated_shipment.at('ServiceType').text
             is_saturday_delivery = rated_shipment.at('AppliedOptions').try(:text) == 'SATURDAY_DELIVERY'
             service_type = is_saturday_delivery ? "#{service_code}_SATURDAY_DELIVERY" : service_code
@@ -534,8 +533,7 @@ module ActiveShipping
     end
 
     def delivery_range_from(transit_time, max_transit_time, delivery_timestamp, is_home_delivery, options)
-      byebug
-      delivery_range = [delivery_timestamp, delivery_timestamp]
+     delivery_range = [delivery_timestamp, delivery_timestamp]
 
       # if there's no delivery timestamp but we do have a transit time, use it
       if delivery_timestamp.blank? && transit_time.present?
