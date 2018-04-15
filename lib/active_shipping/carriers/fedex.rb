@@ -534,6 +534,7 @@ module ActiveShipping
     end
 
     def delivery_range_from(transit_time, max_transit_time, delivery_timestamp, is_home_delivery, options)
+      byebug
       delivery_range = [delivery_timestamp, delivery_timestamp]
 
       # if there's no delivery timestamp but we do have a transit time, use it
