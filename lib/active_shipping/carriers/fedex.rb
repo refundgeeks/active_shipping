@@ -156,6 +156,8 @@ module ActiveShipping
       packages = Array(packages)
 
       rate_request = build_rate_request(origin, destination, packages, options)
+      
+      ap rate_request if options[:debug]
 
       xml = commit(save_request(rate_request), (options[:test] || false))
      
