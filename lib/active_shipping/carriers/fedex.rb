@@ -278,7 +278,7 @@ module ActiveShipping
         xml.StateOrProvinceCode(location.state)
         xml.PostalCode(location.postal_code)
         xml.CountryCode(location.country_code(:alpha2))
-        #xml.Residential('true') if location.residential?
+        xml.Residential('true') if location.residential?
       end
     end
 
@@ -472,7 +472,7 @@ module ActiveShipping
           xml.City(location.city) if location.city
           xml.PostalCode(location.postal_code)
           xml.CountryCode(location.country_code(:alpha2))
-          #xml.Residential(true) unless location.commercial?
+          xml.Residential(true) if location.residential?          
         end
       end
     end
