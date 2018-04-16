@@ -487,7 +487,7 @@ module ActiveShipping
         missing_xml_field = false
         rate_estimates = xml.root.css('> RateReplyDetails').map do |rated_shipment|
           begin
-            ap rated_shipment
+            ap rated_shipment if options[:debug]
             service_code = rated_shipment.at('ServiceType').text
             is_saturday_delivery = rated_shipment.at('AppliedOptions').try(:text) == 'SATURDAY_DELIVERY'
             service_type = is_saturday_delivery ? "#{service_code}_SATURDAY_DELIVERY" : service_code
