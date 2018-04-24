@@ -1,6 +1,6 @@
 module ActiveShipping
   class ShipmentEvent
-    attr_reader :name, :time, :location, :message, :type_code
+    attr_reader :name, :time, :location, :message, :type_code, :exception_code, :exception_description
 
     def initialize(name, time, location, message = nil, type_code = nil, exception_code = nil, exception_description = nil)
       @name, @time, @location, @message, @type_code, @exception_code, @exception_description = name, time, location, message, type_code, exception_code, exception_description
