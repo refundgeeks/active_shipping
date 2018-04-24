@@ -686,11 +686,14 @@ module ActiveShipping
           location = Location.new(:city => city, :state => state, :postal_code => zip_code, :country => country)
           description = event.at('EventDescription').text
           type_code = event.at('EventType').text
-
+          
+          exception_code = event.at('StatusExceptionCode').try(:text)
+          exception_description = event.at('StatusExceptionDescription').try(:text)
+          
           time          = Time.parse(event.at('Timestamp').text)
           zoneless_time = time.utc
 
-          shipment_events << ShipmentEvent.new(description, zoneless_time, location, description, type_code)
+          shipment_events << ShipmentEvent.new(description, zoneless_time, location, description, type_code, exception_code, exception_description)
         end
 
         shipment_events = shipment_events.sort_by(&:time)
