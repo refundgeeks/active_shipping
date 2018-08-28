@@ -1105,8 +1105,7 @@ module ActiveShipping
       end
       year, month, day = date[0..3], date[4..5], date[6..7]
 
-      #Time.utc(year, month, day, hour, minute, second)
-      Time.new(year, month, day, hour, minute, second)
+      Time.utc(year, month, day, hour, minute, second)
     end
 
     def response_success?(document)
