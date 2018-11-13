@@ -214,10 +214,15 @@ module ActiveShipping
 
     def get_delivery_date_estimates(origin, destination, packages, pickup_date=Date.current, options = {})
       origin, destination = upsified_location(origin), upsified_location(destination)
+      puts origin
+      puts destination
       options = @options.merge(options)
+      puts options
       packages = Array(packages)
       access_request = build_access_request
+      puts access_request
       dates_request = build_delivery_dates_request(origin, destination, packages, pickup_date, options)
+      puts dates_request
       response = commit(:delivery_dates, save_request(access_request + dates_request), (options[:test] || false))
       parse_delivery_dates_response(origin, destination, packages, response, options)
     end
